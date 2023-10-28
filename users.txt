@@ -1,2 +1,1 @@
-Samira|sam12@gmail.com|$2y$10$NC1sOXPPNd2M/H5dPhQsuuRaENXqELSR9rAk9pfQlbWAUx15EKdru
-admin|admin@gmail.com|$2y$10$HPjJgD3jLRgujeCFlKLOg.rFbGjVTT.LlpHJsOJ2OmrAqLmTiIDVG
+admin|admin@gmail.com|$2y$10$1g93rqPzx9ux5rTIrNFGaeR56U8ERcfmfmqGlVtM3.bcdO3gJcA0S
