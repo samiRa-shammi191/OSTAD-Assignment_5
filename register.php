@@ -1,3 +1,4 @@
+
 <?php
 session_start();
 
@@ -7,13 +8,36 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $password = $_POST['password'];
 
     if (!empty($username) && !empty($email) && !empty($password)) {
-     
-        $userDetails = "$username|$email|" . password_hash($password, PASSWORD_DEFAULT) . PHP_EOL;
-        file_put_contents('users.txt', $userDetails, FILE_APPEND);
+        $hashedPassword = sha1($password); 
+        $newUserData = "$username|$email|$hashedPassword";
 
-        $_SESSION['username'] = $username;
-        header('Location: welcome.php');
-        exit();
+        $usersData = file_get_contents('users.txt');
+        $usersArray = explode(',', $usersData);
+
+        $userExists = false;
+        foreach ($usersArray as $userData) {
+            list($existingUsername, $existingEmail, $existingHashedPassword) = explode('|', $userData);
+            if ($existingUsername === $username || $existingEmail === $email) {
+                $userExists = true;
+                break;
+            }
+        }
+
+        if (!$userExists) {
+            if (empty($usersData)) {
+                file_put_contents('users.txt', $newUserData);
+            } else {
+                file_put_contents('users.txt', ',' . $newUserData, FILE_APPEND);
+            }
+
+            $_SESSION['username'] = $username;
+            header('Location: welcome.php');
+            exit();
+        } else {
+            $_SESSION['error'] = 'Username or email already exists!';
+            header('Location: register.php');
+            exit();
+        }
     } else {
         $_SESSION['error'] = 'All fields are required!';
         header('Location: register.php');
@@ -21,6 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">

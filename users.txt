@@ -1,1 +1,1 @@
-admin|admin@gmail.com|$2y$10$1g93rqPzx9ux5rTIrNFGaeR56U8ERcfmfmqGlVtM3.bcdO3gJcA0S
+admin|admin@gmail.com|8cb2237d0679ca88db6464eac60da96345513964,admin|admin@gmail.com|8cb2237d0679ca88db6464eac60da96345513964,samira|samira@gmail.com|8cb2237d0679ca88db6464eac60da96345513964,shammi|sam@gmail.com|8cb2237d0679ca88db6464eac60da96345513964
