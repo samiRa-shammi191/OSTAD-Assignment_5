@@ -9,7 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if (!empty($username) && !empty($email) && !empty($password)) {
         $hashedPassword = sha1($password); 
-        $newUserData = "$username|$email|$hashedPassword";
+        $newUserData = "$username|$email|$hashedPassword|user";
 
         $usersData = file_get_contents('users.txt');
         $usersArray = explode(',', $usersData);
@@ -31,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
 
             $_SESSION['username'] = $username;
-            header('Location: welcome.php');
+            header('Location: login.php');
             exit();
         } else {
             $_SESSION['error'] = 'Username or email already exists!';

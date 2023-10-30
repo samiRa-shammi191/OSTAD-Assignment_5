@@ -21,6 +21,13 @@ function getDataFormFile ()
     }
 
 session_start();
+
+
+// if ( isset( $_SESSION['user_role'] ) ) {
+//     header( "Location: role_management.php" );
+//     exit;
+//     }
+
 if ( $_SERVER['REQUEST_METHOD'] === 'POST' ) {
     $email    = trim( $_POST['email'] );
     $password = trim( $_POST['password'] );
@@ -31,13 +38,16 @@ if ( $_SERVER['REQUEST_METHOD'] === 'POST' ) {
     if ( isset( $_POST['login'] ) ) {
         $users = getDataFormFile();
         foreach ( $users as $user ) {
-            list( $userName, $userEmail, $userPassword ) = $user;
+            list( $userName, $userEmail, $userPassword, $userRole ) = $user;
             // dd( $userPassword );
-
             if ( $email == $userEmail && $password == $userPassword ) {
-            
-                echo "You've successfully logged in!";
-                echo "<br>";
+                $_SESSION['user_role'] = $userRole;
+                if ( $userRole === 'admin' ) {
+                    header( "Location: role_management.php" );
+                    }
+                else {
+                    header( "Location: user_page.php" );
+                    }
                 exit;
                 }
             }
@@ -45,7 +55,7 @@ if ( $_SERVER['REQUEST_METHOD'] === 'POST' ) {
         exit;
         }
     else {
-        
+
         $_SESSION['error'] = 'Email and password are required';
         header( 'Location: login.php' );
         exit();
