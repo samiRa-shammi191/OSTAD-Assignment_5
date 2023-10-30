@@ -1,30 +1,4 @@
-<!-- <!DOCTYPE html>
-<html>
 
-    <head>
-        <title>Role Management</title>
-    </head>
-
-    <body>
-        <?php
-        // session_start();
-        
-
-        // if ( isset( $_SESSION['user_role'] ) && $_SESSION['user_role'] === 'admin' ) {
-        
-        //     echo "<h1>Welcome to Role Management Page</h1>";
-        
-        //     }
-        // else {
-        
-        //     echo "<h1>Access Denied</h1>";
-        //     echo "You do not have permission to access this page.";
-        //     }
-        // ?>
-    </body>
-
-</html>
- -->
 
 <?php
 session_start();
@@ -33,6 +7,7 @@ if ( isset( $_SESSION['user_role'] ) && $_SESSION['user_role'] === 'admin' ) {
     echo "<h1>Welcome to Role Management Page</h1>";
 
     $roleDataFile = 'roles.txt';
+   // var_dump($roleDataFile);
 
     // Function to read roles from a file
     function readRolesFromFile ($file)
@@ -89,6 +64,14 @@ if ( isset( $_SESSION['user_role'] ) && $_SESSION['user_role'] === 'admin' ) {
         saveRolesToFile( $roleDataFile, $roles );
         }
 
+if (isset($_POST['logout'])) {
+    session_unset();
+    session_destroy();
+    header("Location: login.php"); 
+    exit();
+}
+
+
     // Display the form to create, edit, and delete roles
     echo "
         <h2>Role Management</h2>
@@ -110,6 +93,10 @@ if ( isset( $_SESSION['user_role'] ) && $_SESSION['user_role'] === 'admin' ) {
             <input type='text' name='user_name_to_delete' placeholder='Existing User Name'>
             <input type='text' name='role_to_delete' placeholder='Role Name to Delete'>
             <button type='submit' name='delete_role'>Delete Role</button>
+<br>
+            
+
+            <button type='submit' name='logout'>Logout</button>
         </form>
     ";
     }
@@ -125,9 +112,7 @@ else {
         <title>Role Management</title>
 
         <style>
-            /* styles.css */
-
-            /* Styling for the form */
+       
             form {
                 margin: 20px 200px 118px 500px;
                 padding: 80px;
@@ -137,13 +122,10 @@ else {
                 width: 300px;
             }
 
-            /* Styling for form headings */
             h3 {
                 font-size: 18px;
                 margin-top: 10px;
             }
-
-            /* Styling for form input fields and buttons */
             input[type="text"],
             input[type="email"],
             input[type="password"] {
@@ -162,14 +144,13 @@ else {
                 border: none;
                 border-radius: 3px;
                 cursor: pointer;
+                margin-bottom: 15px;
             }
 
-            /* Styling for the page title */
             h2 {
                 text-align: center;
             }
 
-            /* Styling for the "Access Denied" message */
             h1 {
                 text-align: center;
                 color: red;

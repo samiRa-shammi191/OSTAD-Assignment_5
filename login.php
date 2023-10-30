@@ -12,7 +12,7 @@ function getDataFormFile ()
     {
     $users = array();
     $files = explode( ",", file_get_contents( "users.txt" ) );
-    // dd( $files );
+    // dd( $files ); 
     foreach ( $files as $file ) {
         $lines = explode( "|", $file );
         array_push( $users, $lines );
